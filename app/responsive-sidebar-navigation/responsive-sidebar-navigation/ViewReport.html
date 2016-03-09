@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="jsonCtrl" lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+    <script src="js/modernizr.js"></script> <!-- Modernizr -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" >
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <title>View Report</title>
+</head>
+<body>
+
+<main class="cd-main-content">
+<div class="content-wrapper">
+    <br>
+    <h1>
+        View Reports
+    </h1>
+    <table name="empListTable" >
+        <tr>
+            <th style="width: 200px">
+
+                Employee ID
+            </th>
+            <th style="width: 200px">
+                Employee Names
+            </th>
+            <th style="width: 400px">
+                Employee Emails<br>
+            </th>
+        </tr>
+
+        <tr ng-repeat="model in myWelcome">
+
+            <td style="width: 200px"><input type = checkbox ng-bind="modelName"> {{model.empId}}</td>
+
+            <td style="width: 200px">{{model.name}}</td>
+            <td style="width: 400px">{{model.emailId}}</td>
+        </tr>
+
+    </table>
+
+
+</div> <!-- .content-wrapper -->
+</main> <!-- .cd-main-content -->
+<script src="js/jquery-2.1.4.js"></script>
+<script src="js/jquery.menu-aim.js"></script>
+<script src="js/main.js"></script> <!-- Resource jQuery -->
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('jsonCtrl', function($scope, $http) {
+        $http.get("Emails.json")
+                .then(function(response) {
+                    $scope.myWelcome = response.data;
+                });
+    });
+</script>
+</body>
+</html>
