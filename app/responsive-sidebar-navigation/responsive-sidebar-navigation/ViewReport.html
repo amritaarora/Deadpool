@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="import" href="index.html">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
@@ -16,16 +16,27 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" >
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+
     <title>View Report</title>
 </head>
 <body>
+<body ng-app="">
 
+<div ng-include="'index.html'"></div>
+
+</body>
 <main class="cd-main-content">
 <div class="content-wrapper">
     <br>
     <h1>
         View Reports
     </h1>
+<form>
+
+    <button type="submit" name="Select All"></button>
+    <button type="reset" name="Reset"></button>
+    <button type="submit" name="Generate" ></button>
+
     <table name="empListTable" >
         <tr>
             <th style="width: 200px">
@@ -49,7 +60,7 @@
         </tr>
 
     </table>
-
+</form>
 
 </div> <!-- .content-wrapper -->
 </main> <!-- .cd-main-content -->
