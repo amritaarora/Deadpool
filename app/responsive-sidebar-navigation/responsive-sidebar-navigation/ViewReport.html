@@ -24,7 +24,6 @@
 
 <body>
 
-<div ng-include="'index.html'"></div>
 
 <main class="cd-main-content">
 <div class="content-wrapper">
@@ -32,11 +31,12 @@
     <h2>
         View Reports
     </h2>
-<form action="./GenerateReport.html">
+<form>
     <br><br>
 
-    <button class="large button" type="reset" value="RESET">RESET</button>
-    <button class="large button" type="submit" value="GENERATE" >GENERATE</button>
+    <button class="large button" type="reset" value="RESET" >RESET</button>
+    <button class="large button" type="submit" value="GENERATE DAILY REP0RT" onclick="location.href='./GenerateReport.html';" >GENERATE DAILY REPORT</button>
+    <button class="large button" type="submit" value="GENERATE DISCREPANCY REP0RT" onclick="location.href='./GenerateDiscrepancy.html';"  >GENERATE DISCREPANCY REPORT</button>
     <br/>
     <br/>
     <table name="empListTable" role="grid" >
@@ -87,6 +87,7 @@
             angular.forEach($scope.myWelcome, function (item) {
                 item.Selected = $scope.selectedAll;
             });
+
         };
     });
 

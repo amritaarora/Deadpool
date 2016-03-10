@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="import" href="index.html">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
@@ -19,7 +20,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <meta charset="UTF-8">
-    <title>Generate Report</title>
+    <title>Discrepany Report</title>
 </head>
 <body>
 <div ng-include="'index.html'"></div>
@@ -37,7 +38,7 @@
 
             <br/>
             <br/>
-            <table name="discrepancyTable" role="grid" >
+            <table name="empListTable" role="grid" >
                 <thead>
                 <tr>
                     <th style="width: 40px">
@@ -54,18 +55,21 @@
                         Employee Emails<br><br>
                     </th>
                     <th style="width: 400px">
-                        Monthly Average Work Time<br><br>
+                        Discrepancy<br><br>
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="item in myWelcome">
 
-                    <td style="width: 40px"> <input type = "checkbox" ng-bind="modelName" ng-model="item.Selected" ></td>
-                    <td> {{item.empId}}</td>
-                    <td style="width: 200px">{{item.name}}</td>
-                    <td style="width: 400px">{{item.emailId}}</td>
-                    <td style="width: 400px">{{item.averageNumberOfHoursMonthly.hour+" Hours "+ item.averageNumberOfHoursMonthly.minute+ " Minutes"}}</td>
+
+                        <td  ng-if = "item.setIfClarificationFromEmployee" style="width: 40px"> <input type = "checkbox" ng-bind="modelName" ng-model="item.Selected" ></td>
+
+                        <td ng-if = "item.setIfClarificationFromEmployee" > {{item.empId}}</td>
+                        <td ng-if = "item.setIfClarificationFromEmployee" style="width: 200px">{{item.name}}</td>
+                        <td ng-if = "item.setIfClarificationFromEmployee" style="width: 400px">{{item.emailId}}</td>
+                        <td ng-if = "item.setIfClarificationFromEmployee" style="width: 400px">{{item.setIfClarificationFromEmployee}}</td>
+
 
                 </tr>
                 </tbody>

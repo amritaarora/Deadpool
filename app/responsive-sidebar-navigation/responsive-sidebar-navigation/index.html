@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="myApp" ng-controller="jsonCtrl" lang="en" class="no-js">
+<html ng-app="myApp" lang="en" class="no-js">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,14 +8,19 @@
 
 	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
-	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+    <script src="js/modernizr.js"></script> <!-- Modernizr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.8/router.js"></script> <!-- Modernizr -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
 
     <!-- Optional theme -->
+    <script src="https://jspm.io/system@0.16.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" >
-
+    <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.8/router.dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.8/router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.8/router.min.js"></script>
   	
 	<title>Home Page</title>
 </head>
@@ -56,7 +61,7 @@
 			<ul>
 				<li class="cd-label">Main</li>
 				<li class="has-children overview">
-				    <a href="ViewReport.html">Reports</a>
+				     <a href = "ViewReport.html">Reports</a>
 
                 </li>
 				<li class="has-children notifications active upload">
@@ -90,6 +95,8 @@
 					</ul>
 				</li>
 			</ul>
+            <div ng-view></div>
+
 <!--
 			<ul>
 				<li class="cd-label">Action</li>
@@ -97,51 +104,28 @@
 			</ul>
 			-->
 		</nav>
-<!--
-		<div class="content-wrapper">
-            <br>
-                <table name="empListTable" >
-                    <tr>
-                        <th style="width: 200px">
-
-                            Employee ID
-                        </th>
-                        <th style="width: 200px">
-                            Employee Names
-                        </th>
-                        <th style="width: 400px">
-                            Employee Emails<br>
-                        </th>
-                    </tr>
-
-                    <tr ng-repeat="model in myWelcome">
-
-                            <td style="width: 200px"><input type = checkbox ng-bind="modelName"> {{model.empId}}</td>
-
-                        <td style="width: 200px">{{model.name}}</td>
-                        <td style="width: 400px">{{model.emailId}}</td>
-                    </tr>
-
-                </table>
 
 
-		</div> <!-- .content-wrapper -->
-        -->
-	</main> <!-- .cd-main-content -->
+
+	</main>
 
 <script src="js/jquery-2.1.4.js"></script>
 <script src="js/jquery.menu-aim.js"></script>
 <script src="js/main.js"></script> <!-- Resource jQuery -->
-    <!--
+
 <script>
-    var app = angular.module('myApp', []);
-    app.controller('jsonCtrl', function($scope, $http) {
-        $http.get("Emails.json")
-                .then(function(response) {
-                    $scope.myWelcome = response.data;
-                });
+    var app = angular.module('myApp', ['ngRoute']);
+    app.config(function($routeProvider, $locationProvider){
+        $routeProvider.
+        when('/ViewReport', {templateUrl: 'ViewReport.html', controller: 'jsonCtrl'}).
+        otherwise({ redirectTo: '/index.html' });
+        // $locationProvider.html5Mode(true);
     });
-</script>
--->
+
+    app.controller('jsonCtrl', function($scope) {
+        $scope.message="hello";
+    });
+    </script>
+
 </body>
 </html>
