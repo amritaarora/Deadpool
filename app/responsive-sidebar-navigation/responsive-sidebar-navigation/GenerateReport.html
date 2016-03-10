@@ -5,6 +5,62 @@
     <title>Generate Report</title>
 </head>
 <body>
+<form action="./Download.html">
+    <br><br>
 
+    <button class="large button" type="reset" value="DOWNLOAD">DOWNLOAD</button>
+    <br/>
+    <br/>
+    <table name="reportTable" role="grid" >
+        <thead>
+        <tr>
+            <th style="width: 40px">
+                <input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" />
+            </th>
+            <th style="width: 200px">
+
+                Employee ID
+            </th>
+            <th style="width: 200px">
+                Employee Names
+            </th>
+            <th style="width: 400px">
+                Employee Emails<br><br>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in myWelcome">
+
+            <td style="width: 40px"> <input type = "checkbox" ng-bind="modelName" ng-model="item.Selected" ></td>
+            <td> {{item.empId}}</td>
+            <td style="width: 200px">{{item.name}}</td>
+            <td style="width: 400px">{{item.emailId}}</td>
+
+        </tr>
+        </tbody>
+    </table>
+</form>
+</div> <!-- .content-wrapper -->
+</main>
+<script src="js/jquery-2.1.4.js"></script>
+<script src="js/jquery.menu-aim.js"></script>
+<script src="js/main.js"></script> <!-- Resource jQuery -->
+<script>
+
+    var app = angular.module("viewApp", []);
+    app.controller("jsonCtrl", function($scope, $http) {
+        $http.get("Emails.json").then(function(response) {
+            $scope.myWelcome = response.data;
+        });
+
+        $scope.checkAll = function () {
+            angular.forEach($scope.myWelcome, function (item) {
+                item.Selected = $scope.selectedAll;
+            });
+        };
+    });
+
+</script>
 </body>
 </html>
