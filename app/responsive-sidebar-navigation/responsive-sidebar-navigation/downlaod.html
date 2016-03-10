@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <title>Using $http.get to read binary data</title>
+</head>
+
+<body ng-app>
+<h1>Using $http.get to read binary data</h1>
+<div ng-controller="FetchCtrl">
+    <div>
+        <a class="btn btn-primary" href="C:/Users/kumars/IdeaProjects/ExcelReader/ExcelFiles/Emails.xlsx">Download</a>
+
+    </div>
+    Click the following button to fetch the same image dynamically:
+    <br/>
+    <button ng-click="fetch()">fetch</button>
+    <br/>{{info}}
+</div>
+<script src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
+<script>
+    // Controller
+    function FetchCtrl($scope, $http) {
+        $scope.URL = "http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png";
+        $scope.ORIGINAL_SIZE = 473831;
+        $scope.info = "";
+
+        $scope.fetch = function() {
+            // Resetting headers to Accept */* is necessary to perform a simple cross-site request
+            // (see https://developer.mozilla.org/en-US/docs/HTTP/Access_control_CORS#Simple_requests)
+            delete $http.defaults.headers.common['X-Requested-With'];
+            $http.get($scope.URL, {
+                responseType: "arraybuffer"
+            }).
+            success(function(data) {
+                $scope.info =
+                        "Read '" + $scope.URL + "' with " + data.byteLength + " bytes in a variable of type '" + typeof(data) + "'. The original file has " + $scope.ORIGINAL_SIZE + " bytes."
+
+// to download in IE >10 versions
+                // Try using msSaveBlob if supported
+                console.log("Trying saveBlob method ...");
+                var blob = new Blob([data], {
+                    type: 'image/png'
+                });
+                console.log(blob);
+                if (navigator.msSaveBlob)
+                    navigator.msSaveBlob(blob, 'Lenna.png');
+                else {
+                    // Try using other saveBlob implementations, if available
+                    var saveBlob = navigator.webkitSaveBlob || navigator.mozSaveBlob || navigator.saveBlob;
+                    if (saveBlob === undefined) throw "Not supported";
+                    saveBlob(blob, filename);
+                }
+                console.log("saveBlob succeeded");
+
+            }).
+            error(function(data, status) {
+                $scope.info = "Request failed with status: " + status;
+            });
+        };
+    }
+</script>
+</body>
+
+</html>
