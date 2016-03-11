@@ -1,97 +1,100 @@
 <!DOCTYPE html>
-<html ng-app="viewApp" ng-controller="jsonCtrl" lang="en" class="no-js">
-<head>
-    <meta charset="UTF-8">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="import" href="index.html">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+    <html ng-app="sampleApp" ng-controller="GenerateReportController" lang="en" class="no-js">
+    <head>
+        <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-    <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
-    <script src="js/modernizr.js"></script> <!-- Modernizr -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
-    <link rel="stylesheet" href="foundation6/css/foundation.css" />
-    <link rel="stylesheet" href="foundation6/css/app.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" >
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    <meta charset="UTF-8">
-    <title>Generate Report</title>
-</head>
-<body>
-<div ng-include="'index.html'"></div>
+        <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+        <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+        <script src="js/modernizr.js"></script> <!-- Modernizr -->
 
-<main class="cd-main-content">
-    <div class="content-wrapper">
-        <br>
-        <h2>
-            Download Report
-        </h2>
-        <form action="./DownloadReport.html">
-            <br><br>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+        <script src="app.js"></script>
 
-            <button class="large button" type="reset" value="DOWNLOAD">DOWNLOAD</button>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" >
 
-            <br/>
-            <br/>
-            <table name="discrepancyTable" role="grid" >
-                <thead>
-                <tr>
-                    <th style="width: 40px">
-                        <input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" />
-                    </th>
-                    <th style="width: 200px">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 
-                        Employee ID
-                    </th>
-                    <th style="width: 200px">
-                        Employee Names
-                    </th>
-                    <th style="width: 400px">
-                        Employee Emails<br><br>
-                    </th>
-                    <th style="width: 400px">
-                        Monthly Average Work Time<br><br>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in myWelcome">
+        <title>Employee List</title>
+    </head>
 
-                    <td style="width: 40px"> <input type = "checkbox" ng-bind="modelName" ng-model="item.Selected" ></td>
-                    <td> {{item.empId}}</td>
-                    <td style="width: 200px">{{item.name}}</td>
-                    <td style="width: 400px">{{item.emailId}}</td>
-                    <td style="width: 400px">{{item.averageNumberOfHoursMonthly.hour+" Hours "+ item.averageNumberOfHoursMonthly.minute+ " Minutes"}}</td>
+    <body>
 
-                </tr>
-                </tbody>
-            </table>
-        </form>
+    <main class="cd-main-content">
+        <div class="content-wrapper">
+            <br>
+            <h2 style="text-align: center">
+                List of All Employees
+            </h2>
+            <form>
+                <br><br>
 
-    </div> <!-- .content-wrapper -->
-</main> <!-- .cd-main-content -->
-<script src="js/jquery-2.1.4.js"></script>
-<script src="js/jquery.menu-aim.js"></script>
-<script src="js/main.js"></script> <!-- Resource jQuery -->
-<script>
+                <button class="btn btn-primary" style="float: right;" type="submit" value="DOWNLOAD REP0RT" onclick="location.href='./GenerateDiscrepancy.html';"  >DOWNLOAD REPORT</button>
+                <br/>
+                <br/>
+                <table name="empListTable" class="table table-striped">
+                    <thead>
+                    <tr style="font-weight:bolder;">
+                        <th style="width: 40px">
+                            <input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" />
+                        </th>
+                        <th style="width: 200px">
 
-    var app = angular.module("viewApp", []);
-    app.controller("jsonCtrl", function($scope, $http) {
-        $http.get("Discrepancies.json").then(function(response) {
-            $scope.myWelcome = response.data;
-        });
+                            EMPLOYEE ID
+                        </th>
+                        <th style="width: 200px">
 
-        $scope.checkAll = function () {
-            angular.forEach($scope.myWelcome, function (item) {
-                item.Selected = $scope.selectedAll;
-            });
-        };
-    });
+                            SALESFORCE ID
+                        </th>
+                        <th style="width: 200px">
+                            EMPLOYEE NAMES
+                        </th>
+                        <th style="width: 400px">
+                            EMPLOYEE EMAILS
+                        </th>
+                        <th style="width: 200px">
 
-</script>
-</body>
+                            AVERAGE CHECK-IN
+                        </th>
+                        <th style="width: 200px">
+
+                            AVERAGE CHECK-OUT
+                        </th>
+                        <th style="width: 200px">
+
+                            AVERAGE WORK HOURS
+                        </th>
+                        <th style="width: 400px">
+                            CLARIFICATION NEEDED
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in myWelcome">
+
+                        <td  style="width: 40px"> <input type = "checkbox" ng-bind="modelName" ng-model="item.Selected" ></td>
+                        <td> {{item.empRevalId}}</td>
+                        <td> {{item.empSalesforceId}}</td>
+                        <td style="width: 200px">{{item.empName}}</td>
+                        <td style="width: 400px">{{item.empEmailId}}</td>
+                        <td style="width: 400px">{{item.empAvgCheckInTimeForMonth}}</td>
+                        <td style="width: 400px">{{item.empAvgCheckOutTimeForMonth}}</td>
+                        <td style="width: 400px">{{item.empAvgWorkHoursForMonth}}</td>
+                        <td style="width: 400px">{{item.empIfClarificationNeeded}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+
+        </div> <!-- .content-wrapper -->
+    </main> <!-- .cd-main-content -->
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/jquery.menu-aim.js"></script>
+    <script src="js/main.js"></script> <!-- Resource jQuery -->
+    </body>
 </html>
