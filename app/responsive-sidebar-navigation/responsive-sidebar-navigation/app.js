@@ -39,5 +39,10 @@ sampleApp.controller("ReportController", function($scope, $http) {
             });
 
         };
+
+       $scope.showMe = false;
+        $scope.clickFunc = function() {
+            $scope.showMe = !$scope.showMe;
+        }
     });
 
