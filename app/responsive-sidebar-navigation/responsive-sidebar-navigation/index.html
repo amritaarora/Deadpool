@@ -1,5 +1,6 @@
 <!doctype html>
-<html ng-app="sampleApp" lang="en" >
+<html ng-app="sampleApp" ng-controller="showController" lang="en" >
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" >
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
 	<script src="app.js"></script>
 	<script src="js/modernizr.js"></script> <!-- Modernizr -->
 
@@ -58,14 +60,16 @@
 
                 </li>
 				<li class="has-children notifications active upload">
-					<a href="#0" id="upload">Upload Files</a>
 
-					<ul>
-						<li><a href="#0">Biometric File</a></li>
-						<li><a href="#0">Financial Force File </a></li>
-						<li><a href="#0">Email List File</a></li>
-						<li><a href="#0">Holiday List File</a></li>
-					</ul>
+					<a href="#0" id="upload" ng-click="clickFunc()">Upload Files</a>
+
+                        <ul ng-show="showMe">
+                            <li><a href="#0">Biometric File</a></li>
+                            <li><a href="#0">Financial Force File </a></li>
+                            <li><a href="#0">Email List File</a></li>
+                            <li><a href="#0">Holiday List File</a></li>
+                        </ul>
+
 				</li>
 
 				<li class="has-children comments">
@@ -97,6 +101,17 @@
 <script src="js/jquery-2.1.4.js"></script>
 <script src="js/jquery.menu-aim.js"></script>
 <script src="js/main.js"></script> <!-- Resource jQuery -->
+<script>
+
+    var app = angular.module('sampleApp', []);
+    app.controller('showController', function($scope) {
+        $scope.showMe = false;
+        $scope.clickFunc = function() {
+            $scope.showMe = !$scope.showMe;
+        }
+    });
+
+</script>
 
 
 
