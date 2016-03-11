@@ -19,7 +19,10 @@ sampleApp.config(['$routeProvider',
             templateUrl: 'GenerateReport.html',
             controller: 'GenerateReportController'
         }).
-
+            when('/GenerateDiscrepancy',{
+            templateUrl: 'GenerateDiscrepancy.html',
+            controller: 'GenerateDiscrepancyController'
+        }).
             otherwise({
                 redirectTo: '/index.html'
             });
@@ -51,6 +54,28 @@ sampleApp.controller("ReportController", function($scope, $http) {
             $scope.showMe = !$scope.showMe;
         }
     });
+sampleApp.controller("GenerateDiscrepancyController", function($scope, $http) {
+    $http.get("DescrepanciesOnly.json").then(function(response) {
+        $scope.myWelcome = response.data;
+    });
+
+    $scope.checkAll = function () {
+        if ($scope.selectedAll) {
+            $scope.selectedAll = true;
+        } else {
+            $scope.selectedAll = false;
+        }
+        angular.forEach($scope.myWelcome, function (item) {
+            item.Selected = $scope.selectedAll;
+        });
+
+    };
+
+    $scope.showMe = false;
+    $scope.clickFunc = function() {
+        $scope.showMe = !$scope.showMe;
+    }
+});
 sampleApp.controller("GenerateReportController", function($scope, $http) {
     $http.get("WebDetails.json").then(function(response) {
         $scope.myWelcome = response.data;
