@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
 
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/app.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" >
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
@@ -41,9 +43,16 @@
 		<nav class="cd-side-nav">
 			<ul>
 				<li class="cd-label">Main</li>
+                <li class="has-children comments">
+                    <a href="#0">Overview</a>
+
 				<li class="has-children overview">
 
-				    <a href="#ViewReport">Reports</a>
+				    <a href="">Reports</a>
+                    <ul>
+                        <li><a href="#ListDaily">Daily Report</a></li>
+                        <li><a href="#ListDiscrepancy">Discrepancy Report</a></li>
+                    </ul>
 
 
 

@@ -1,75 +1,70 @@
 <!DOCTYPE html>
-<html ng-app="viewApp" ng-controller="jsonCtrl" lang="en" class="no-js">
+<html ng-app="sampleApp" ng-controller="jsonCtrl" lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
-    <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="import" href="index.html">
+
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
     <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
     <script src="js/modernizr.js"></script> <!-- Modernizr -->
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
-    <link rel="stylesheet" href="foundation6/css/foundation.css" />
-    <link rel="stylesheet" href="foundation6/css/app.css" />
+
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" >
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    <meta charset="UTF-8">
-    <title>Discrepany Report</title>
+
+    <title>Employee List</title>
 </head>
+
 <body>
-<div ng-include="'index.html'"></div>
 
 <main class="cd-main-content">
     <div class="content-wrapper">
         <br>
-        <h2>
-            Download Report
+        <h2 style="text-align: center">
+            List for All Discrepancies
         </h2>
-        <form action="./DownloadReport.html">
+        <form>
             <br><br>
 
-            <button class="large button" type="reset" value="DOWNLOAD">DOWNLOAD</button>
-
+            <button class="btn btn-primary" style="float: right;" type="submit" value="GENERATE DISCREPANCY REP0RT" onclick="location.href='./GenerateDiscrepancy.html';"  >GENERATE DISCREPANCY REPORT</button>
             <br/>
             <br/>
-            <table name="empListTable" role="grid" >
+            <table name="empListTable" class="table table-striped">
                 <thead>
-                <tr>
+                <tr style="font-weight:bolder;">
                     <th style="width: 40px">
                         <input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" />
                     </th>
                     <th style="width: 200px">
 
-                        Employee ID
+                        EMPLOYEE ID
                     </th>
                     <th style="width: 200px">
-                        Employee Names
+                        EMPLOYEE NAMES
                     </th>
                     <th style="width: 400px">
-                        Employee Emails<br><br>
+                        EMPLOYEE EMAILS
                     </th>
                     <th style="width: 400px">
-                        Discrepancy<br><br>
+                        DISCREPANCY
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="item in myWelcome">
 
-
-                        <td ng-if = "item.setIfClarificationFromEmployee" style="width: 40px"> <input type = "checkbox" ng-bind="modelName" ng-model="item.Selected" ></td>
-
-                        <td ng-if = "item.setIfClarificationFromEmployee" > {{item.empId}}</td>
-                        <td ng-if = "item.setIfClarificationFromEmployee" style="width: 200px">{{item.name}}</td>
-                        <td ng-if = "item.setIfClarificationFromEmployee" style="width: 400px">{{item.emailId}}</td>
-                        <td ng-if = "item.setIfClarificationFromEmployee" style="width: 400px">{{item.setIfClarificationFromEmployee}}</td>
-
+                    <td  style="width: 40px"> <input type = "checkbox" ng-bind="modelName" ng-model="item.Selected" ></td>
+                    <td> {{item.empId}}</td>
+                    <td style="width: 200px">{{item.name}}</td>
+                    <td style="width: 400px">{{item.emailId}}</td>
+                    <td style="width: 400px">{{item.setIfClarificationFromEmployee}}</td>
 
                 </tr>
                 </tbody>
@@ -81,21 +76,23 @@
 <script src="js/jquery-2.1.4.js"></script>
 <script src="js/jquery.menu-aim.js"></script>
 <script src="js/main.js"></script> <!-- Resource jQuery -->
-<script>
 
-    var app = angular.module("viewApp", []);
+<script>
+    var app = angular.module("sampleApp", []);
     app.controller("jsonCtrl", function($scope, $http) {
-        $http.get("Discrepancies.json").then(function(response) {
-            $scope.myWelcome = response.data;
+        $http.get("Emails.json").then(function(response) {
+                    $scope.myWelcome = response.data;
         });
 
         $scope.checkAll = function () {
             angular.forEach($scope.myWelcome, function (item) {
                 item.Selected = $scope.selectedAll;
             });
+
         };
     });
 
 </script>
+
 </body>
 </html>

@@ -7,21 +7,37 @@ var sampleApp = angular.module('sampleApp', []);
 sampleApp.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
-        when('/ViewReport', {
-            templateUrl: 'ViewReport.html'
+        when('/ListDaily', {
+            templateUrl: 'ListDaily.html',
+            controller: 'ReportController'
         }).
-        when('/ShowOrders', {
-            templateUrl: 'templates/show_orders.html',
-            controller: 'ShowOrdersController'
+        when('/ListDiscrepancy', {
+            templateUrl: 'ListDiscrepancy.html',
+            controller: 'ReportController'
         }).
-        otherwise({
-            redirectTo: '/AddNewOrder'
-        });
+
+            otherwise({
+                redirectTo: '/index.html'
+            });
+
     }]);
 
 
-sampleApp.controller('ShowOrdersController', function($scope) {
+sampleApp.controller("ReportController", function($scope, $http) {
+        $http.get("Discrepancies.json").then(function(response) {
+            $scope.myWelcome = response.data;
+        });
 
-    $scope.message = 'This is Show orders screen';
+        $scope.checkAll = function () {
+            if ($scope.selectedAll) {
+                $scope.selectedAll = true;
+            } else {
+                $scope.selectedAll = false;
+            }
+            angular.forEach($scope.myWelcome, function (item) {
+                item.Selected = $scope.selectedAll;
+            });
 
-});
+        };
+    });
+
