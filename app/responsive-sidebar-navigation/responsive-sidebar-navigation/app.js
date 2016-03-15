@@ -27,8 +27,6 @@ sampleApp.config(['$routeProvider',
                 redirectTo: '/index.html'
             });
 
-
-
     }]);
 
 
